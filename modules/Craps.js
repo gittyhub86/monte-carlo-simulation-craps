@@ -1,5 +1,5 @@
 class Craps {
-	constructor(betAmt, betFour, betFive, betSix, betEight, 
+	constructor(betAmt, betFour, betFive, betSix, betEight,
 		betNine, betTen, pass) {
 		this.betAmt = betAmt;
 		this.tot = 0;
@@ -33,8 +33,7 @@ class Craps {
 			return;
 		}
 		while (!this.point) {
-			this.diceRes[0] = this.getRandom();
-			this.diceRes[1] = this.getRandom();
+			this.rollDice();
 			this.diceTot = this.diceRes[0] + this.diceRes[1];
 			this.log += `Player rolled ${this.diceRes[0]}, ${this.diceRes[1]}<br />`;
 			if (this.pass) {
@@ -44,7 +43,7 @@ class Craps {
 					this.printBalance();
 					this.passWin++;
 					this.point = null;
-				} else if ((this.diceTot === 2) || (this.diceTot === 3) || 
+				} else if ((this.diceTot === 2) || (this.diceTot === 3) ||
 					(this.diceTot === 12)) {
 					this.log += 'Rolled a 2, 3 or 12. Lose pass bet<br />';
 					this.tot -= this.betAmt;
@@ -70,11 +69,15 @@ class Craps {
 				} else if (this.diceTot !== 12) {
 					this.point = this.diceTot;
 				}
-			}	
+			}
 			if (this.point) {
 				this.log += `Point is: ${this.point}<br />`;
 			}
 		}
+	}
+	rollDice() {
+		this.diceRes[0] = this.getRandom();
+		this.diceRes[1] = this.getRandom();
 	}
 	getRandom() {
 		return Math.floor(Math.random() * 6 + 1);
@@ -85,5 +88,5 @@ class Craps {
 }
 
 const c = new Craps(5, 4, 4, 6, 6, 9, 10, true);
-c.comeout();
+c.comeOut();
 console.log(`${c.log},   ${c.tot}`);
