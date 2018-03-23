@@ -147,7 +147,9 @@ class Craps {
 		return Math.floor(Math.random() * 6 + 1);
 	}
 	printBalance() {
-
+		this.log += "Balance is ";
+		this.log += (this.tot < 0) ? (`-$${Math.abs(this.tot).toLocaleString()}<br />`) :
+										`$${this.tot.toLocaleString()}<br />`;
 	}
 }
 
