@@ -1,0 +1,101 @@
+<h2>Monte Carlo Simulation of Craps</h2>
+<div>
+	<h4>
+		Simulate a random game of dice. See the results of placing different
+		bets for <span class="italic">n</span> number of trials and rounds.
+		For example, play the pass line, and the 6 and 8 place bets. See the
+		outcome over 200,000 games by setting the Rounds per trial to 1,000
+		and the Number of trials to 200.
+	</h4>
+</div>
+<table>
+	<tr>
+		<td>
+		    <label>Rounds per trial: </label>
+		</td>
+		<td>
+			<input type="number" min="1" ng-model="ctrl.roundsPerTrial" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<label>Number of trials: </label>
+		</td>
+		<td>
+			<input type="number" min="1" ng-model="ctrl.numTrials" />
+		</td>
+	</tr>
+	</tr>
+		<td>
+			<label>Pass bet (Uncheck for<br />
+		           don't pass bet)</label>
+		</td>
+		<td>
+			<input type="checkbox" ng-checked="ctrl.passLine"
+		           ng-model="ctrl.passLine" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<label>Pass/Don't pass bet $amount: </label>
+		</td>
+		<td>
+			<input type="number" min="0" ng-model="ctrl.betAmt" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<label>Place bet 4 $amount: </label>
+		</td>
+		<td>
+			<input type="number" min="0" ng-model="ctrl.betFour" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<label>Place bet 5 $amount: </label>
+		</td>
+		<td>
+			<input type="number" min="0" ng-model="ctrl.betFive" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<label>Place bet 6 $amount: </label>
+		</td>
+		<td>
+			<input type="number" min="0" ng-model="ctrl.betSix" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<label>Place bet 8 $amount: </label>
+		</td>
+		<td>
+			<input type="number" min="0" ng-model="ctrl.betEight" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<label>Place bet 9 $amount: </label>
+		</td>
+		<td>
+			<input type="number" min="0" ng-model="ctrl.betNine" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<label>Place bet 10 $amount: </label>
+		</td>
+		<td>
+			<input type="number" min="0" ng-model="ctrl.betTen" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<button ng-disabled="ctrl.disableButton" run-sim class="btn">
+		    Start
+		    </button>
+		</td>
+	</tr>
+</table>
