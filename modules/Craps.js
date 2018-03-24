@@ -152,10 +152,3 @@ class Craps {
 										`$${this.tot.toLocaleString()}<br />`;
 	}
 }
-
-const c = new Craps(5, 5, 5, 6, 6, 5, 5, true);
-c.comeOut();
-console.log(`${c.log},   ${c.tot}`);
-console.log('point round\n\n')
-c.pointRound();
-console.log(`${c.log},   ${c.tot}`);
