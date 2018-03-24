@@ -10,4 +10,7 @@ function SimCtrl() {
 	this.betNine = 0;
 	this.betTen = 0;
 	this.disableButton = false;
+	this.resLog = '';
+	this.simLog = '';
+	this.errArr = [];
 }
