@@ -1,13 +1,11 @@
 <h2>Monte Carlo Simulation of Craps</h2>
-<div>
-	<h4>
-		Simulate a random game of dice. See the results of placing different
-		bets for <span class="italic">n</span> number of trials and rounds.
-		For example, play the pass line, and the 6 and 8 place bets. See the
-		outcome over 200,000 games by setting the Rounds per trial to 1,000
-		and the Number of trials to 200.
-	</h4>
-</div>
+<h4>
+	Simulate a random game of dice. See the results of placing different
+	bets for <span class="italic">n</span> number of trials and rounds.
+	For example, play the pass line, and the 6 and 8 place bets. See the
+	outcome over 200,000 games by setting the Rounds per trial to 1,000
+	and the Number of trials to 200.
+</h4>
 <table>
 	<tr>
 		<td>
@@ -103,3 +101,5 @@
 <div class="error" ng-show="ctrl.errArr.length > 0" ng-repeat="msg in ctrl.errArr">
 	<p>{{msg}}</p>
 </div>
+<h3 ng-show="ctrl.resLog">Totals:</h3>
+<div ng-if="ctrl.resLog" ng-bind-html="ctrl.resLog | trusted"></div>

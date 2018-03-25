@@ -61,16 +61,19 @@ function runSim() {
 						console.log(`Totals: dontPassWin: ${dontPassWin}, dontPassLoss: ${dontPassLoss}`);
 					}
 					console.log('Results from each trial: ', trialResults);
+					console.log('scope.ctrl.reslog: ', scope.ctrl.resLog);
 				} catch(e) {
 					scope.ctrl.simLog = '';
 					console.log(e);
 					scope.ctrl.errArr.push("Error: Please try running less rounds and/or less number of trials");
 				}
 			}
-			element.bind('click', () => {
-				crapsSim(scope.ctrl.roundsPerTrial, scope.ctrl.numTrials, scope.ctrl.betAmt,
+			element.on('click', () => {
+				scope.$apply(() => {
+					crapsSim(scope.ctrl.roundsPerTrial, scope.ctrl.numTrials, scope.ctrl.betAmt,
 					scope.ctrl.betFour, scope.ctrl.betFive, scope.ctrl.betSix,
 					scope.ctrl.betEight, scope.ctrl.betNine, scope.ctrl.betTen, scope.ctrl.passLine);
+				});
 			});
 		}
 	}
