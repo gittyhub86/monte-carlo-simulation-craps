@@ -98,8 +98,12 @@
 	</tr>
 </table>
 
+<div class="progress-ring" ng-if="ctrl.isLoading==true"></div>
+<div class="progress-ring-text" ng-show="ctrl.isLoading==true">Loading...</div>
 <div class="error" ng-show="ctrl.errArr.length > 0" ng-repeat="msg in ctrl.errArr">
 	<p>{{msg}}</p>
 </div>
 <h3 ng-show="ctrl.resLog">Totals:</h3>
 <div ng-if="ctrl.resLog" ng-bind-html="ctrl.resLog | trusted"></div>
+<p ng-show="ctrl.resLog">Total money won/loss each trial:</p>
+<div append-result></div>

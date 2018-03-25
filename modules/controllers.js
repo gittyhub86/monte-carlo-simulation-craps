@@ -13,4 +13,5 @@ function SimCtrl() {
 	this.resLog = '';
 	this.simLog = '';
 	this.errArr = [];
+	this.isLoading = false;
 }

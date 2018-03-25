@@ -1,4 +1,5 @@
 angular.module('core', [])
 	.controller('simCtrl', SimCtrl)
-	.directive('runSim', [runSim])
+	.directive('runSim', ['$q', '$timeout', runSim])
+	.directive('appendResult', ['$q', '$timeout', appendResult])
 	.filter('trusted', ['$sce', trusted])
