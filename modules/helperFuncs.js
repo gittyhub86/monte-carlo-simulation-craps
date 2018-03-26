@@ -1,5 +1,15 @@
 function crapsSim(scope, roundsPerTrial, numTrials, betAmt, betFour,
-	betFive, betSix, betEight, betNine, betTen, passLine) {
+					betFive, betSix, betEight, betNine, betTen, passLine) {
+	function resetProps(craps) {
+		craps.log = '';
+		craps.tot = 0;
+		craps.passWin = 0;
+		craps.passLoss = 0;
+		craps.dontPassLoss = 0;
+		craps.dontPassWin = 0;
+		craps.diceTot = null;
+		craps.point = null;
+	}
 	const resArr = [];
 	let passWin = 0;
 	let passLoss = 0;
@@ -10,12 +20,12 @@ function crapsSim(scope, roundsPerTrial, numTrials, betAmt, betFour,
 	let trialResults = [];
 	let craps;
 	if (passLine) {
-				craps = new Craps(betAmt, betFour, betFive,
-					betSix, betEight, betNine, betTen, true);
-			} else {
-				craps = new Craps(betAmt, betFour, betFive,
-					betSix, betEight, betNine, betTen, false);;
-			}
+		craps = new Craps(betAmt, betFour, betFive,
+						betSix, betEight, betNine, betTen, true);
+	} else {
+		craps = new Craps(betAmt, betFour, betFive,
+						betSix, betEight, betNine, betTen, false);;
+	}
 	try {
 		for (let i=1; i<numTrials+1; i++, trialCounter++) {
 			for (let j=1; j<roundsPerTrial+1; j++, counter++) {
@@ -28,6 +38,10 @@ function crapsSim(scope, roundsPerTrial, numTrials, betAmt, betFour,
 				craps.log = '';
 			}
 			trialResults.push(craps.tot);
+			if (trialCounter%20 === 0) {
+				make2dArr(scope.ctrl.showMoreTrialResults, trialResults);
+				trialResults = [];
+			}
 			if (passLine) {
 				passWin += craps.passWin;
 				passLoss += craps.passLoss;
@@ -35,28 +49,22 @@ function crapsSim(scope, roundsPerTrial, numTrials, betAmt, betFour,
 				dontPassWin += craps.dontPassWin;
 				dontPassLoss += craps.dontPassLoss;
 			}
-			if (passLine) {
-				console.log(`passWin: ${craps.passWin}, passLoss: ${craps.passLoss}`);
-			} else {
-				console.log(`dontPassWin: ${craps.dontPassWin}, dontPassLoss: ${craps.dontPassLoss}`);
-			}
-			resetCrapsProps(craps);
+			resetProps(craps);
+		}
+		if (trialResults.length) {
+			make2dArr(scope.ctrl.showMoreTrialResults, trialResults);
 		}
 		if (passLine) {
 			scope.ctrl.resLog += `<p>Total pass bet wins: ` +
 								`${passWin.toLocaleString()}</p>
 								<p>Total pass bet losses: ` +
 								`${passLoss.toLocaleString()}</p>`;
-			console.log(`Totals: passWin: ${passWin}, passLoss: ${passLoss}`);
 		} else {
 			scope.ctrl.resLog += `<p>Total don't pass bet wins: ` +
 								`${dontPassWin.toLocaleString()}</p>
 								<p>Total don't pass bet losses: ` +
 								`${dontPassLoss.toLocaleString()}</p>`;
-			console.log(`Totals: dontPassWin: ${dontPassWin}, dontPassLoss: ${dontPassLoss}`);
 		}
-		console.log('Results from each trial: ', trialResults);
-		console.log('scope.ctrl.reslog: ', scope.ctrl.resLog);
 		console.log('showMoreTrialResults: ', scope.ctrl.showMoreTrialResults);
 	} catch(e) {
 		scope.ctrl.simLog = '';
@@ -65,13 +73,29 @@ function crapsSim(scope, roundsPerTrial, numTrials, betAmt, betFour,
 	}
 }
 
-function resetCrapsProps(craps) {
-	craps.log = '';
-	craps.tot = 0;
-	craps.passWin = 0;
-	craps.passLoss = 0;
-	craps.dontPassLoss = 0;
-	craps.dontPassWin = 0;
-	craps.diceTot = null;
-	craps.point = null;
+function make2dArr(arrOne, arrTwo) {
+	arrOne.push([...arrTwo]);
+	return;
+}
+
+function appendTrialRes(val, scope) {
+	const div = angular.element('<div>');
+	if (Array.isArray(val)) {
+		div.addClass("row");
+		let spanStr = '';
+		val.forEach((elem, idx) => {
+			if (elem >=0) {
+				elem = `$${roundNum(elem)}`;
+			} else {
+				elem = `-$${roundNum(Math.abs(elem))}`;
+			}
+			spanStr += `<span class="trial">Trial ${scope.ctrl.trialResultCounter++}: ${elem}</span>`;
+		});
+		div.html(spanStr);
+	}
+	return div;
+}
+
+function roundNum(val) {
+	return Number(Math.round(val+'e2') +'e-2').toLocaleString();
 }

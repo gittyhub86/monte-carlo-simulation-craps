@@ -93,3 +93,12 @@ tr [colspan="2"] {
 	display: inline-block;
 	vertical-align: middle;
 }
+.trial {
+	padding-right: 1.5em;
+	padding-bottom: 1.5em;
+}
+.row {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}

@@ -27,16 +27,21 @@ function runSim($q, $timeout) {
 }
 
 function appendResult($q, $timeout) {
-	function displayResult() {
+	return {
+		restrict: 'A',
+		link: function(scope, element, attrs, ctrl) {
+			function displayResult() {
 				const deferred = $q.defer();
+				if (scope.ctrl.showMoreTrialResults.length) {
+					const trialResBatch = scope.ctrl.showMoreTrialResults.shift();
+					const trialResEl = appendTrialRes(trialResBatch, scope);
+					element.append(trialResEl);
+				}
 				$timeout(() => {
 					deferred.resolve();
 				}, 100);
 				return deferred.promise;
 			}
-	return {
-		restrict: 'A',
-		link: function(scope, element, attrs, ctrl) {
 			scope.$on('start-sim', () => {
 				displayResult().then(() => {
 					scope.ctrl.isLoading = false;
