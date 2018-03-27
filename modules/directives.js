@@ -41,6 +41,16 @@ function appendResult($q, $timeout, $compile) {
 										"show-more show-more-trial");
 					}
 				}
+				if (scope.ctrl.showMoreLogs.length) {
+					const log = scope.ctrl.showMoreLogs.shift();
+					//const entry = appendEl(log);
+					const div = angular.element('<div>');
+					div.append(log);
+					element.append(div);
+					if (scope.ctrl.showMoreLogs.length) {
+						createShowMore(scope, element, $compile, "show-more", "show-more");
+					}
+				}
 				$timeout(() => {
 					deferred.resolve();
 				}, 100);

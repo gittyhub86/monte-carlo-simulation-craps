@@ -36,6 +36,10 @@ function crapsSim(scope, roundsPerTrial, numTrials, betAmt, betFour,
 				scope.ctrl.simLog += `${craps.log}<br />`;
 				console.log(craps.log);
 				craps.log = '';
+				if (counter%5 === 0) {
+					scope.ctrl.showMoreLogs.push(scope.ctrl.simLog);
+					scope.ctrl.simLog = '';
+				}
 			}
 			trialResults.push(craps.tot);
 			if (trialCounter%20 === 0) {
@@ -54,6 +58,10 @@ function crapsSim(scope, roundsPerTrial, numTrials, betAmt, betFour,
 		if (trialResults.length) {
 			make2dArr(scope.ctrl.showMoreTrialResults, trialResults);
 		}
+		if (scope.ctrl.simLog) {
+			scope.ctrl.showMoreLogs.push(scope.ctrl.simLog)
+			scope.ctrl.simLog = '';
+					}
 		if (passLine) {
 			scope.ctrl.resLog += `<p>Total pass bet wins: ` +
 								`${passWin.toLocaleString()}</p>
@@ -65,7 +73,7 @@ function crapsSim(scope, roundsPerTrial, numTrials, betAmt, betFour,
 								<p>Total don't pass bet losses: ` +
 								`${dontPassLoss.toLocaleString()}</p>`;
 		}
-		console.log('showMoreTrialResults: ', scope.ctrl.showMoreTrialResults);
+		console.log('showMoreLogs: ', scope.ctrl.showMoreLogs);
 	} catch(e) {
 		scope.ctrl.simLog = '';
 		console.log(e);
