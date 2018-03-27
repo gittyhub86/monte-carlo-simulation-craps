@@ -102,3 +102,22 @@ tr [colspan="2"] {
 	display: flex;
 	flex-wrap: wrap;
 }
+.show-more {
+	cursor: pointer;
+	margin-bottom: 10em;
+	margin-top: 1em;
+	background-color: #fff;
+	color: rgba(33, 150, 243, 0.95);
+	border: 2px solid rgba(33, 150, 243, 0.95);
+	font-weight: 600;
+	width: 125px;
+	height: 20px;
+	padding: 0.5em;
+	border-radius: 2px ;
+	text-align: center;
+	font-size: 15px;
+}
+
+.show-more-trial {
+	margin-bottom: 2.8em;
+}

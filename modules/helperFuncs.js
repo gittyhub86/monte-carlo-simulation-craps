@@ -99,3 +99,14 @@ function appendTrialRes(val, scope) {
 function roundNum(val) {
 	return Number(Math.round(val+'e2') +'e-2').toLocaleString();
 }
+
+function createShowMore(scope, element, $compile, attr, className) {
+	const showMore = angular.element('<div>');
+	showMore.attr(attr, '');
+	showMore.addClass(className);
+	showMore.html('<span>Show More</span>');
+	console.log('showMore: ', showMore)
+	element.append(showMore[0]);
+	$compile(showMore)(scope);
+	return;
+}

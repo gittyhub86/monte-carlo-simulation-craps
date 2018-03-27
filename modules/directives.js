@@ -26,7 +26,7 @@ function runSim($q, $timeout) {
 	}
 }
 
-function appendResult($q, $timeout) {
+function appendResult($q, $timeout, $compile) {
 	return {
 		restrict: 'A',
 		link: function(scope, element, attrs, ctrl) {
@@ -36,6 +36,10 @@ function appendResult($q, $timeout) {
 					const trialResBatch = scope.ctrl.showMoreTrialResults.shift();
 					const trialResEl = appendTrialRes(trialResBatch, scope);
 					element.append(trialResEl);
+					if (scope.ctrl.showMoreTrialResults.length) {
+						createShowMore(scope, element, $compile, "show-more-trial",
+										"show-more show-more-trial");
+					}
 				}
 				$timeout(() => {
 					deferred.resolve();
