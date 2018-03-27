@@ -17,7 +17,6 @@ function crapsSim(scope, roundsPerTrial, numTrials, betAmt, betFour,
 	let dontPassLoss = 0;
 	let counter = 1;
 	let trialCounter = 1;
-	let trialResults = [];
 	let craps;
 	if (passLine) {
 		craps = new Craps(betAmt, betFour, betFive,
@@ -41,11 +40,7 @@ function crapsSim(scope, roundsPerTrial, numTrials, betAmt, betFour,
 					scope.ctrl.simLog = '';
 				}
 			}
-			trialResults.push(craps.tot);
-			if (trialCounter%20 === 0) {
-				make2dArr(scope.ctrl.showMoreTrialResults, trialResults);
-				trialResults = [];
-			}
+			scope.ctrl.trialResults.push(craps.tot);
 			if (passLine) {
 				passWin += craps.passWin;
 				passLoss += craps.passLoss;
@@ -54,9 +49,6 @@ function crapsSim(scope, roundsPerTrial, numTrials, betAmt, betFour,
 				dontPassLoss += craps.dontPassLoss;
 			}
 			resetProps(craps);
-		}
-		if (trialResults.length) {
-			make2dArr(scope.ctrl.showMoreTrialResults, trialResults);
 		}
 		if (scope.ctrl.simLog) {
 			scope.ctrl.showMoreLogs.push(scope.ctrl.simLog)
@@ -79,11 +71,6 @@ function crapsSim(scope, roundsPerTrial, numTrials, betAmt, betFour,
 		console.log(e);
 		scope.ctrl.errArr.push("Error: Please try running less rounds and/or less number of trials");
 	}
-}
-
-function make2dArr(arrOne, arrTwo) {
-	arrOne.push([...arrTwo]);
-	return;
 }
 
 function appendTrialRes(val, scope) {

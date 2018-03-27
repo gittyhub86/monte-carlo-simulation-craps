@@ -14,7 +14,7 @@ function SimCtrl() {
 	this.simLog = '';
 	this.errArr = [];
 	this.isLoading = false;
-	this.showMoreTrialResults = [];
+	this.trialResults = [];
 	this.showMoreLogs = [];
 	this.trialResultCounter = 1;
 }

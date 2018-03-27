@@ -32,11 +32,11 @@ function appendResult($q, $timeout, $compile) {
 		link: function(scope, element, attrs, ctrl) {
 			function displayResult() {
 				const deferred = $q.defer();
-				if (scope.ctrl.showMoreTrialResults.length) {
-					const trialResBatch = scope.ctrl.showMoreTrialResults.shift();
+				if (scope.ctrl.trialResults.length) {
+					const trialResBatch = scope.ctrl.trialResults.splice(0, 20);
 					const trialResEl = appendTrialRes(trialResBatch, scope);
 					element.append(trialResEl);
-					if (scope.ctrl.showMoreTrialResults.length) {
+					if (scope.ctrl.trialResults.length) {
 						createShowMore(scope, element, $compile, "show-more-trial",
 										"show-more show-more-trial");
 					}
