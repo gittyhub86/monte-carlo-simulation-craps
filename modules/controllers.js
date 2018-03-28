@@ -11,7 +11,6 @@ function SimCtrl() {
 	this.betTen = 0;
 	this.disableButton = false;
 	this.resLog = '';
-	this.simLog = '';
 	this.errArr = [];
 	this.isLoading = false;
 	this.trialResults = [];

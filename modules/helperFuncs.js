@@ -10,7 +10,7 @@ function crapsSim(scope, roundsPerTrial, numTrials, betAmt, betFour,
 		craps.diceTot = null;
 		craps.point = null;
 	}
-	const resArr = [];
+	let logging = '';
 	let passWin = 0;
 	let passLoss = 0;
 	let dontPassWin = 0;
@@ -28,16 +28,15 @@ function crapsSim(scope, roundsPerTrial, numTrials, betAmt, betFour,
 	try {
 		for (let i=1; i<numTrials+1; i++, trialCounter++) {
 			for (let j=1; j<roundsPerTrial+1; j++, counter++) {
-				scope.ctrl.simLog += `<h4>Trial ${i.toLocaleString()}, Round `+
+				logging += `<h4>Trial ${i.toLocaleString()}, Round `+
 												 `${j.toLocaleString()}</h4>`;
 				craps.comeOut();
 				craps.pointRound();
-				scope.ctrl.simLog += `${craps.log}<br />`;
-				console.log(craps.log);
+				logging += `${craps.log}<br />`;
 				craps.log = '';
 				if (counter%5 === 0) {
-					scope.ctrl.showMoreLogs.push(scope.ctrl.simLog);
-					scope.ctrl.simLog = '';
+					scope.ctrl.showMoreLogs.push(logging);
+					logging = '';
 				}
 			}
 			scope.ctrl.trialResults.push(craps.tot);
@@ -50,9 +49,9 @@ function crapsSim(scope, roundsPerTrial, numTrials, betAmt, betFour,
 			}
 			resetProps(craps);
 		}
-		if (scope.ctrl.simLog) {
-			scope.ctrl.showMoreLogs.push(scope.ctrl.simLog)
-			scope.ctrl.simLog = '';
+		if (logging) {
+			scope.ctrl.showMoreLogs.push(logging)
+			logging = '';
 					}
 		if (passLine) {
 			scope.ctrl.resLog += `<p>Total pass bet wins: ` +
@@ -65,9 +64,7 @@ function crapsSim(scope, roundsPerTrial, numTrials, betAmt, betFour,
 								<p>Total don't pass bet losses: ` +
 								`${dontPassLoss.toLocaleString()}</p>`;
 		}
-		console.log('showMoreLogs: ', scope.ctrl.showMoreLogs);
 	} catch(e) {
-		scope.ctrl.simLog = '';
 		console.log(e);
 		scope.ctrl.errArr.push("Error: Please try running less rounds and/or less number of trials");
 	}
@@ -100,7 +97,6 @@ function createShowMore(scope, element, $compile, attr, className) {
 	showMore.attr(attr, '');
 	showMore.addClass(className);
 	showMore.html('<span>Show More</span>');
-	console.log('showMore: ', showMore)
 	element.append(showMore);
 	$compile(showMore)(scope);
 	return;
