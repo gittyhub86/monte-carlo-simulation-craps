@@ -43,7 +43,6 @@ function appendResult($q, $timeout, $compile) {
 				}
 				if (scope.ctrl.showMoreLogs.length) {
 					const log = scope.ctrl.showMoreLogs.shift();
-					//const entry = appendEl(log);
 					const div = angular.element('<div>');
 					div.append(log);
 					element.append(div);
@@ -80,6 +79,26 @@ function showMoreTrial($compile) {
 				if (scope.ctrl.trialResults.length) {
 					createShowMore(scope, sibling, $compile, "show-more-trial",
 									"show-more show-more-trial");
+				}
+			});
+		}
+	}
+}
+
+function showMore($compile) {
+	return {
+		restrict: 'A',
+		link: function(scope, element, attrs, ctrl) {
+			element.on('click', () => {
+				loading(attr="[show-more]");
+				const log = scope.ctrl.showMoreLogs.shift();
+				const div = angular.element('<div>');
+				div.append(log);
+				const parent = element.parent();
+				element.remove();
+				parent.append(div);
+				if (scope.ctrl.showMoreLogs.length) {
+					createShowMore(scope, parent, $compile, "show-more", "show-more");
 				}
 			});
 		}
