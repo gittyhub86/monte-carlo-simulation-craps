@@ -65,3 +65,23 @@ function appendResult($q, $timeout, $compile) {
 		}
 	}
 }
+
+function showMoreTrial($compile) {
+	return {
+		restrict: 'A',
+		link: function(scope, element, attrs, ctrl) {
+			element.on('click', () => {
+				loading(attr="[show-more-trial");
+				const trialResBatch = scope.ctrl.trialResults.splice(0, 20);
+				const trialResEl = appendTrialRes(trialResBatch, scope);
+				const sibling = $('.row');
+				element.remove();
+				sibling.append(trialResEl);
+				if (scope.ctrl.trialResults.length) {
+					createShowMore(scope, sibling, $compile, "show-more-trial",
+									"show-more show-more-trial");
+				}
+			});
+		}
+	}
+}

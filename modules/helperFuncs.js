@@ -101,7 +101,13 @@ function createShowMore(scope, element, $compile, attr, className) {
 	showMore.addClass(className);
 	showMore.html('<span>Show More</span>');
 	console.log('showMore: ', showMore)
-	element.append(showMore[0]);
+	element.append(showMore);
 	$compile(showMore)(scope);
+	return;
+}
+
+function loading(attr) {
+	const showMoreEl = $(attr);
+	showMoreEl.text('Loading...');
 	return;
 }
