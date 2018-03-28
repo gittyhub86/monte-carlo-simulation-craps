@@ -14,11 +14,11 @@ function runSim($q, $timeout) {
 				}
 				scope.$apply(() => {
 					busy().then(() => {
-						crapsSim(scope, scope.ctrl.roundsPerTrial, scope.ctrl.numTrials,
+						const results = crapsSim(scope, scope.ctrl.roundsPerTrial, scope.ctrl.numTrials,
 								scope.ctrl.betAmt, scope.ctrl.betFour, scope.ctrl.betFive,
 								scope.ctrl.betSix, scope.ctrl.betEight, scope.ctrl.betNine,
 								scope.ctrl.betTen, scope.ctrl.passLine);
-						scope.$broadcast('start-sim');
+						scope.$broadcast('start-sim', ...results);
 					});
 				});
 			});
@@ -30,23 +30,25 @@ function appendResult($q, $timeout, $compile) {
 	return {
 		restrict: 'A',
 		link: function(scope, element, attrs, ctrl) {
-			function displayResult() {
+			function displayResult(trialResults, showMoreLogs) {
 				const deferred = $q.defer();
-				if (scope.ctrl.trialResults.length) {
-					const trialResBatch = scope.ctrl.trialResults.splice(0, 20);
+				if (trialResults.length) {
+					const trialResBatch = trialResults.splice(0, 20);
 					const trialResEl = appendTrialRes(trialResBatch, scope);
 					element.append(trialResEl);
-					if (scope.ctrl.trialResults.length) {
+					if (trialResults.length) {
+						scope.ctrl.trialResults = trialResults;
 						createShowMore(scope, element, $compile, "show-more-trial",
 										"show-more show-more-trial");
 					}
 				}
-				if (scope.ctrl.showMoreLogs.length) {
-					const log = scope.ctrl.showMoreLogs.shift();
+				if (showMoreLogs.length) {
+					const log = showMoreLogs.shift();
 					const div = angular.element('<div>');
 					div.append(log);
 					element.append(div);
-					if (scope.ctrl.showMoreLogs.length) {
+					if (showMoreLogs.length) {
+						scope.ctrl.showMoreLogs = showMoreLogs;
 						createShowMore(scope, element, $compile, "show-more", "show-more");
 					}
 				}
@@ -55,8 +57,8 @@ function appendResult($q, $timeout, $compile) {
 				}, 100);
 				return deferred.promise;
 			}
-			scope.$on('start-sim', () => {
-				displayResult().then(() => {
+			scope.$on('start-sim', (event, trialResults, showMoreLogs) => {
+				displayResult(trialResults, showMoreLogs).then(() => {
 					scope.ctrl.isLoading = false;
 					scope.ctrl.disableButton = false;
 				});
