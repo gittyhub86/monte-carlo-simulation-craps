@@ -128,16 +128,14 @@ function validateUserInput(scope) {
 	if ((isNaN(scope.ctrl.roundsPerTrial)) && (isNaN(scope.ctrl.numTrials))) {
 		scope.ctrl.errArr.push("Please enter a number for Rounds per trial/Number of trials");
 	}
-	if ((isNaN(scope.ctrl.roundsPerTrial)) || (scope.ctrl.roundsPerTrial === null) ||
-		(scope.ctrl.roundsPerTrial === undefined)) {
+	if ((isNaN(scope.ctrl.roundsPerTrial)) || (scope.ctrl.roundsPerTrial === null)) {
 		scope.ctrl.errArr.push("Rounds per trial must be a number greater than 1");
 	}
-	if ((isNaN(scope.ctrl.numTrials)) || (scope.ctrl.numTrials === null) ||
-		(scope.ctrl.numTrials === undefined)) {
+	if ((isNaN(scope.ctrl.numTrials)) || (scope.ctrl.numTrials === null)) {
 		scope.ctrl.errArr.push("Number of trials must be a number greater than 1");
 	}
-	if ((isNaN(scope.ctrl.betAmt)) || (scope.ctrl.betAmt === null)) {
-		scope.ctrl.errArr.push("Pass/Don't pass bet amount must be a number");
+	if ((scope.ctrl.betAmt <= 0) || (isNaN(scope.ctrl.betAmt)) || (scope.ctrl.betAmt === null)) {
+		scope.ctrl.errArr.push("Pass/Don't pass bet amount must be a number greater than 0");
 	}
 	if ((scope.ctrl.passLine !== true) && (scope.ctrl.passLine !== false)) {
 		scope.ctrl.errArr.push("Pass bet must be checked or unchecked");
