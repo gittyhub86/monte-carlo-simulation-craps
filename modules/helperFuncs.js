@@ -120,3 +120,49 @@ function reset(scope) {
 	scope.ctrl.trialResultCounter = 1;
 	return;
 }
+
+function validateUserInput(scope) {
+	if (scope.ctrl.roundsPerTrial * scope.ctrl.numTrials > 1000000) {
+		scope.ctrl.errArr.push("Error: Please try running less rounds and/or less number of trials");
+	}
+	if ((isNaN(scope.ctrl.roundsPerTrial)) && (isNaN(scope.ctrl.numTrials))) {
+		scope.ctrl.errArr.push("Please enter a number for Rounds per trial/Number of trials");
+	}
+	if ((isNaN(scope.ctrl.roundsPerTrial)) || (scope.ctrl.roundsPerTrial === null) ||
+		(scope.ctrl.roundsPerTrial === undefined)) {
+		scope.ctrl.errArr.push("Rounds per trial must be a number greater than 1");
+	}
+	if ((isNaN(scope.ctrl.numTrials)) || (scope.ctrl.numTrials === null) ||
+		(scope.ctrl.numTrials === undefined)) {
+		scope.ctrl.errArr.push("Number of trials must be a number greater than 1");
+	}
+	if ((isNaN(scope.ctrl.betAmt)) || (scope.ctrl.betAmt === null)) {
+		scope.ctrl.errArr.push("Pass/Don't pass bet amount must be a number");
+	}
+	if ((scope.ctrl.passLine !== true) && (scope.ctrl.passLine !== false)) {
+		scope.ctrl.errArr.push("Pass bet must be checked or unchecked");
+	}
+	if ((isNaN(scope.ctrl.betFour)) || (scope.ctrl.betFour === null)) {
+		scope.ctrl.errArr.push("Place bet 4 must be a number");
+	}
+	if ((isNaN(scope.ctrl.betFive)) || (scope.ctrl.betFive === null)) {
+		scope.ctrl.errArr.push("Place bet 5 must be a number");
+	}
+	if ((isNaN(scope.ctrl.betSix)) || (scope.ctrl.betSix === null)) {
+		scope.ctrl.errArr.push("Place bet 6 must be a number");
+	}
+	if ((isNaN(scope.ctrl.betEight)) || (scope.ctrl.betEight === null)) {
+		scope.ctrl.errArr.push("Place bet 8 must be a number");
+	}
+	if ((isNaN(scope.ctrl.betNine)) || (scope.ctrl.betNine === null)) {
+		scope.ctrl.errArr.push("Place bet 9 must be a number");
+	}
+	if ((isNaN(scope.ctrl.betTen)) || (scope.ctrl.betTen === null)) {
+		scope.ctrl.errArr.push("Place bet 10 must be a number");
+	}
+	if (scope.ctrl.errArr.length > 0) {
+		return false;
+	} else {
+		return true;
+	}
+}

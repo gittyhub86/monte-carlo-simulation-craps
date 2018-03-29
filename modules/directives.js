@@ -14,6 +14,9 @@ function runSim($q, $timeout) {
 				}
 				scope.$apply(() => {
 					reset(scope);
+					if (!validateUserInput(scope)) {
+						return;
+					}
 					busy().then(() => {
 						const results = crapsSim(scope, scope.ctrl.roundsPerTrial, scope.ctrl.numTrials,
 								scope.ctrl.betAmt, scope.ctrl.betFour, scope.ctrl.betFive,
