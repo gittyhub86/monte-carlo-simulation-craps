@@ -100,7 +100,7 @@ function createShowMore(scope, element, $compile, attr, className) {
 	showMore.attr(attr, '');
 	showMore.addClass(className);
 	showMore.html('<span>Show More</span>');
-	element.append(showMore);
+	element.append(showMore[0]);
 	$compile(showMore)(scope);
 	return;
 }
