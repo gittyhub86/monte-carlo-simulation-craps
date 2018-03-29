@@ -67,7 +67,6 @@ function crapsSim(scope, roundsPerTrial, numTrials, betAmt, betFour,
 								`${dontPassLoss.toLocaleString()}</p>`;
 		}
 	} catch(e) {
-		console.log(e);
 		scope.ctrl.errArr.push("Error: Please try running less rounds and/or less number of trials");
 	}
 	return [trialResults, showMoreLogs];
@@ -122,7 +121,7 @@ function reset(scope) {
 }
 
 function validateUserInput(scope) {
-	if (scope.ctrl.roundsPerTrial * scope.ctrl.numTrials > 1000000) {
+	if (scope.ctrl.roundsPerTrial * scope.ctrl.numTrials > 900000) {
 		scope.ctrl.errArr.push("Error: Please try running less rounds and/or less number of trials");
 	}
 	if ((isNaN(scope.ctrl.roundsPerTrial)) && (isNaN(scope.ctrl.numTrials))) {
