@@ -13,6 +13,7 @@ function runSim($q, $timeout) {
 					return deferred.promise;
 				}
 				scope.$apply(() => {
+					reset(scope);
 					busy().then(() => {
 						const results = crapsSim(scope, scope.ctrl.roundsPerTrial, scope.ctrl.numTrials,
 								scope.ctrl.betAmt, scope.ctrl.betFour, scope.ctrl.betFive,

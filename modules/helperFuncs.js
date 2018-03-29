@@ -110,3 +110,13 @@ function loading(attr) {
 	showMoreEl.text('Loading...');
 	return;
 }
+
+function reset(scope) {
+	$("[append-result]").children().remove();
+	scope.ctrl.trialResults = [];
+	scope.ctrl.showMoreLogs = [];
+	scope.ctrl.resLog = '';
+	scope.ctrl.errArr = [];
+	scope.ctrl.trialResultCounter = 1;
+	return;
+}
