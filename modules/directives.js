@@ -76,7 +76,7 @@ function showMoreTrial($compile) {
 		restrict: 'A',
 		link: function(scope, element, attrs, ctrl) {
 			element.on('click', () => {
-				loading(attr="[show-more-trial");
+				loading("[show-more-trial]");
 				const trialResBatch = scope.ctrl.trialResults.splice(0, 20);
 				const trialResEl = appendTrialRes(trialResBatch, scope);
 				const sibling = $('.row')[0];
@@ -96,7 +96,7 @@ function showMore($compile) {
 		restrict: 'A',
 		link: function(scope, element, attrs, ctrl) {
 			element.on('click', () => {
-				loading(attr="[show-more]");
+				loading("[show-more]");
 				const log = scope.ctrl.showMoreLogs.shift();
 				const div = angular.element('<div>');
 				div.append(log);
